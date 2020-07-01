@@ -33,7 +33,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClassName = "navmap.App"
+    mainClassName = "navmap.Map"
 }
 
 val test by tasks.getting(Test::class) {
