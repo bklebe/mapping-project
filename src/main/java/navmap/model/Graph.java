@@ -1,4 +1,4 @@
-package map.model;
+package navmap.model;
 
 /*
  * Author: Beatrice Klebe

@@ -1,14 +1,14 @@
-package map.controller;
+package navmap.controller;
 
 /*
  * Author: Beatrice Klebe
  * NetID: bklebe
  */
 
-import map.model.Edge;
-import map.model.Graph;
-import map.model.Vertex;
-import map.view.Window;
+import navmap.model.Edge;
+import navmap.model.Graph;
+import navmap.model.Vertex;
+import navmap.view.Window;
 
 import java.io.IOException;
 import java.nio.file.Files;

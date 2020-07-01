@@ -1,12 +1,12 @@
-package map.view;
+package navmap.view;
 
 /*
  * Author: Beatrice Klebe
  * NetID: bklebe
  */
 
-import map.model.Graph;
-import map.model.Vertex;
+import navmap.model.Graph;
+import navmap.model.Vertex;
 
 import javax.swing.*;
 import java.awt.*;

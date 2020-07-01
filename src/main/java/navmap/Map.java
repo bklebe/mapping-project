@@ -1,11 +1,11 @@
-package map;
+package navmap;
 
 /*
  * Author: Beatrice Klebe
  * NetID: bklebe
  */
 
-import map.controller.Launcher;
+import navmap.controller.Launcher;
 
 import java.io.IOException;
 import java.util.Arrays;
