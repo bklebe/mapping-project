@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.util.Arrays;
 
 final class Map {
+    private Map() {}
+
     public static void main(final String[] args) {
         try {
             new Launcher(Arrays.asList(args));
