@@ -1,10 +1,5 @@
 package navmap.controller;
 
-import navmap.model.Edge;
-import navmap.model.Graph;
-import navmap.model.Vertex;
-import navmap.view.Window;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,78 +11,81 @@ import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import navmap.model.Edge;
+import navmap.model.Graph;
+import navmap.model.Vertex;
+import navmap.view.Window;
 
 public final class Launcher {
-    private List<Vertex> shortestPath;
-    private boolean show;
-    private boolean directions;
-    private final boolean empty;
-    private String origin;
-    private String destination;
-    private Path mapFile;
-    private Stream<String> lines;
+  private List<Vertex> shortestPath;
+  private boolean show;
+  private boolean directions;
+  private final boolean empty;
+  private String origin;
+  private String destination;
+  private Path mapFile;
+  private Stream<String> lines;
 
-    public Launcher(final String[] args) {
-        List<String> arguments = Arrays.asList(args);
-        this.empty = arguments.isEmpty();
-        this.show = arguments.contains("-show");
-        this.directions = arguments.contains("-directions");
-        if (!this.empty) {
-            this.origin = arguments.get(3);
-            this.destination = arguments.get(4);
-            this.mapFile = Paths.get(arguments.get(0));
-            try {
-                this.lines = Files.lines(mapFile);
-            } catch (IOException e) {
-                this.lines = null;
-            }
-        }
+  public Launcher(final String[] args) {
+    List<String> arguments = Arrays.asList(args);
+    this.empty = arguments.isEmpty();
+    this.show = arguments.contains("-show");
+    this.directions = arguments.contains("-directions");
+    if (!this.empty) {
+      this.origin = arguments.get(3);
+      this.destination = arguments.get(4);
+      this.mapFile = Paths.get(arguments.get(0));
+      try {
+        this.lines = Files.lines(mapFile);
+      } catch (IOException e) {
+        this.lines = null;
+      }
     }
+  }
 
-    public void launch() {
-        if (empty) {
-            System.out.println("Usage: Graph data.txt [-show] [-directions startIntersection endIntersection] [-meridianmap]");
-        } else {
+  public void launch() {
+    if (empty) {
+      System.out.println(
+          "Usage: Graph data.txt [-show] [-directions startIntersection endIntersection] [-meridianmap]");
+    } else {
 
-            final List<Vertex> vertices = getVertices();
+      final List<Vertex> vertices = getVertices();
 
-            final Map<String, Vertex> vertexMap = vertices.stream()
-                                                          .collect(Collectors.toMap(Vertex::getId, v -> v));
+      final Map<String, Vertex> vertexMap =
+          vertices.stream().collect(Collectors.toMap(Vertex::getId, v -> v));
 
-            final List<Edge> edges = getEdges(vertexMap);
+      final List<Edge> edges = getEdges(vertexMap);
 
-            Graph model = new Graph(vertices, edges, vertexMap);
+      Graph model = new Graph(vertices, edges, vertexMap);
 
-            shortestPath = new ArrayList<>();
+      shortestPath = new ArrayList<>();
 
-            if (directions) {
-                // args 3 and 4
-                shortestPath = model.shortestPath(this.origin, this.destination);
-            }
+      if (directions) {
+        // args 3 and 4
+        shortestPath = model.shortestPath(this.origin, this.destination);
+      }
 
-            if (show) {
-                new Window(model, shortestPath);
-            }
-        }
+      if (show) {
+        new Window(model, shortestPath);
+      }
     }
+  }
 
-    private List<Edge> getEdges(Map<String, Vertex> vertexMap) {
-        var r = Pattern.compile("^r");
-        return this.lines
-                                      .filter(r.asPredicate())
-                                      .map(s -> {
-                                          final List<String> splat = Arrays.asList(s.split("\\t"));
-                                          return new Edge(splat.get(1), vertexMap.get(splat.get(2)), vertexMap.get(splat.get(3)));
-                                      })
-                                      .collect(Collectors.toList());
-    }
+  private List<Edge> getEdges(Map<String, Vertex> vertexMap) {
+    var r = Pattern.compile("^r");
+    return this.lines
+        .filter(r.asPredicate())
+        .map(
+            s -> {
+              final List<String> splat = Arrays.asList(s.split("\\t"));
+              return new Edge(
+                  splat.get(1), vertexMap.get(splat.get(2)), vertexMap.get(splat.get(3)));
+            })
+        .collect(Collectors.toList());
+  }
 
-    private List<Vertex> getVertices() {
-        var i = Pattern.compile("^i");
-        return this.lines
-                                           .filter(i.asPredicate())
-                                           .map(Vertex::new)
-                                           .collect(Collectors.toList());
-    }
+  private List<Vertex> getVertices() {
+    var i = Pattern.compile("^i");
+    return this.lines.filter(i.asPredicate()).map(Vertex::new).collect(Collectors.toList());
+  }
 }
-
