@@ -16,7 +16,7 @@ public class MapTest {
     }
 
     @Test
-    void main() throws IOException {
+    void main() {
         var testStdOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(testStdOut));
 
