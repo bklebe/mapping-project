@@ -1,10 +1,5 @@
 package navmap.view;
 
-/*
- * Author: Beatrice Klebe
- * NetID: bklebe
- */
-
 import java.util.List;
 import javax.swing.*;
 import navmap.model.Graph;

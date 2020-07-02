@@ -1,10 +1,5 @@
 package navmap;
 
-/*
- * Author: Beatrice Klebe
- * NetID: bklebe
- */
-
 import navmap.controller.Launcher;
 
 final class Map {
