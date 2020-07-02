@@ -1,10 +1,5 @@
 package navmap.model;
 
-/*
- * Author: Beatrice Klebe
- * NetID: bklebe
- */
-
 import java.security.InvalidParameterException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -16,7 +11,6 @@ public final class Graph {
   private final double longRange;
   private final double latMin;
   private final double longMin;
-  //    private List<Edge> spanningTree;
 
   public Graph(
       final List<Vertex> vertices, final List<Edge> edges, final Map<String, Vertex> vertexMap) {
@@ -30,7 +24,6 @@ public final class Graph {
     final double border = 0.25;
 
     latMin = Collections.min(vertices, latComp).getLat() - border;
-    //        final double latMax = Collections.max(vertices, latComp).getLat() + border;
     longMin = Collections.min(vertices, longComp).getLong() - border;
     final double longMax = Collections.max(vertices, longComp).getLong() + border;
 
@@ -87,8 +80,6 @@ public final class Graph {
       sum += path.get(i - 1).distanceTo(path.get(i));
     }
 
-    //        path.stream().mapToInt(v -> v.distanceTo())
-
     return sum;
   }
 
@@ -110,13 +101,6 @@ public final class Graph {
             });
   }
 
-  //    private void minimumSpanningTree() {
-  //    }
-
-  //    private void printVertices() {
-  //        vertices.forEach(Vertex::printEdges);
-  //    }
-
   public List<Edge> getEdges() {
     return edges;
   }
@@ -128,10 +112,6 @@ public final class Graph {
   public double getLongMin() {
     return longMin;
   }
-
-  //    public double getLatRange() {
-  //        return latRange;
-  //    }
 
   public double getLongRange() {
     return longRange;

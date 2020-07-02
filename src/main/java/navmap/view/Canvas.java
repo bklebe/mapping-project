@@ -1,10 +1,5 @@
 package navmap.view;
 
-/*
- * Author: Beatrice Klebe
- * NetID: bklebe
- */
-
 import java.awt.*;
 import java.awt.geom.Line2D;
 import java.util.List;

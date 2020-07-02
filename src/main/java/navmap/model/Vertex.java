@@ -1,10 +1,5 @@
 package navmap.model;
 
-/*
- * Author: Beatrice Klebe
- * NetID: bklebe
- */
-
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;

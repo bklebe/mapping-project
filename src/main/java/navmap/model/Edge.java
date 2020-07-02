@@ -1,10 +1,5 @@
 package navmap.model;
 
-/*
- * Author: Beatrice Klebe
- * NetID: bklebe
- */
-
 public final class Edge implements Comparable<Edge> {
   private final String id;
   private final Vertex start;
@@ -54,7 +49,6 @@ public final class Edge implements Comparable<Edge> {
                 Math.sqrt(
                     sin2((lat2 - lat1) / 2)
                         + Math.cos(lat1) * Math.cos(lat2) * sin2((long2 - long1) / 2)));
-    //        System.out.println("ID: " + id + " Weight: " + weight);
     return weight;
   }
 
