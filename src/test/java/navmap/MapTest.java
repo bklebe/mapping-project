@@ -22,7 +22,8 @@ public class MapTest {
     Map.main(new String[0]);
 
     assertEquals(
-        "Usage: Graph data.txt [-show] [-directions startIntersection endIntersection] [-meridianmap]%n",
+        String.format(
+            "Usage: Graph data.txt [-show] [-directions startIntersection endIntersection] [-meridianmap]%n"),
         testStdOut.toString());
   }
 
