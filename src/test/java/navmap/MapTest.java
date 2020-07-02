@@ -3,6 +3,7 @@ package navmap;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,7 +16,7 @@ public class MapTest {
     }
 
     @Test
-    void main() {
+    void main() throws IOException {
         var testStdOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(testStdOut));
 

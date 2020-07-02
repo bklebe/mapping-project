@@ -7,18 +7,11 @@ package navmap;
 
 import navmap.controller.Launcher;
 
-import java.io.IOException;
-import java.util.Arrays;
-
 final class Map {
     private Map() {}
 
     public static void main(final String[] args) {
-        try {
-            new Launcher(Arrays.asList(args));
-        } catch (IOException e) {
-            System.err.println("Could not load file.");
-            e.printStackTrace();
-        }
+        var launcher = new Launcher(args);
+        launcher.launch();
     }
 }
