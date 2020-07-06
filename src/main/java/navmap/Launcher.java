@@ -1,8 +1,6 @@
-package navmap.controller;
+package navmap;
 
-import java.io.IOException;
 import java.io.PrintStream;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -25,24 +23,20 @@ public final class Launcher {
   private final boolean empty;
   private String origin;
   private String destination;
-  private Path mapFile;
   private Stream<String> lines;
 
-  public Launcher(final String[] args, PrintStream output) {
+  public Launcher(final String[] args, PrintStream output, DataLoader loader) {
     List<String> arguments = Arrays.asList(args);
     this.empty = arguments.isEmpty();
     this.show = arguments.contains("-show");
     this.directions = arguments.contains("-directions");
     this.output = output;
+
     if (!this.empty) {
       this.origin = arguments.get(3);
       this.destination = arguments.get(4);
-      this.mapFile = Paths.get(arguments.get(0));
-      try {
-        this.lines = Files.lines(mapFile);
-      } catch (IOException e) {
-        this.lines = null;
-      }
+      Path mapFile = Paths.get(arguments.get(0));
+      this.lines = loader.loadFrom(mapFile);
     }
   }
 
