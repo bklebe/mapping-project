@@ -9,8 +9,7 @@ public class FileLoader implements DataLoader {
     @Override
     public Stream<String> loadFrom(Path source) {
         try {
-            var lines = Files.lines(source);
-            return lines;
+            return Files.lines(source);
         } catch (IOException e) {
             throw new Error("Could not read from source.");
         }
