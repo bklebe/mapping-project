@@ -4,31 +4,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 public class MapTest {
-  private final PrintStream stdOut;
-
-  MapTest() {
-    this.stdOut = System.out;
-  }
 
   @Test
-  void main() {
-    var testStdOut = new ByteArrayOutputStream();
-    System.setOut(new PrintStream(testStdOut));
-
-    Map.main(new String[0]);
+  void launcherPrintsUsage() {
+    var outputStream = new ByteArrayOutputStream();
+    var launcher = new Launcher(new String[0], new PrintStream(outputStream), new ErrorDataLoader());
+    launcher.launch();
 
     assertEquals(
-        String.format(
-            "Usage: Graph data.txt [-show] [-directions startIntersection endIntersection] [-meridianmap]%n"),
-        testStdOut.toString());
-  }
-
-  @AfterEach
-  void tearDown() {
-    System.setOut(this.stdOut);
+            String.format(
+                    "Usage: Graph data.txt [-show] [-directions startIntersection endIntersection] [-meridianmap]%n"),
+            outputStream.toString());
   }
 }
