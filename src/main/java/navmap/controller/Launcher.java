@@ -1,6 +1,7 @@
 package navmap.controller;
 
 import java.io.IOException;
+import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -17,6 +18,7 @@ import navmap.model.Vertex;
 import navmap.view.Window;
 
 public final class Launcher {
+  private final PrintStream output;
   private List<Vertex> shortestPath;
   private boolean show;
   private boolean directions;
@@ -26,11 +28,12 @@ public final class Launcher {
   private Path mapFile;
   private Stream<String> lines;
 
-  public Launcher(final String[] args) {
+  public Launcher(final String[] args, PrintStream output) {
     List<String> arguments = Arrays.asList(args);
     this.empty = arguments.isEmpty();
     this.show = arguments.contains("-show");
     this.directions = arguments.contains("-directions");
+    this.output = output;
     if (!this.empty) {
       this.origin = arguments.get(3);
       this.destination = arguments.get(4);
@@ -45,7 +48,7 @@ public final class Launcher {
 
   public void launch() {
     if (empty) {
-      System.out.println(
+      this.output.println(
           "Usage: Graph data.txt [-show] [-directions startIntersection endIntersection] [-meridianmap]");
     } else {
 
