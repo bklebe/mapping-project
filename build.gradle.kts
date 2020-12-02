@@ -13,6 +13,8 @@ plugins {
     // Apply the application plugin to add support for building a CLI application.
     application
 
+    `maven-publish`
+
     id("com.diffplug.gradle.spotless") version "4.4.0"
 }
 
@@ -41,6 +43,12 @@ application {
 val test by tasks.getting(Test::class) {
     // Use junit platform for unit tests
     useJUnitPlatform()
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("navmap")
+    }
 }
 
 spotless {
